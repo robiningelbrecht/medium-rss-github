@@ -14,6 +14,12 @@ Specific example to display my own most recent Medium article:
 https://medium-rss-github.vercel.app/@ingelbrechtrobin/2/
 ```
 
+To link to a Medium article, just append `link`:
+
+```
+https://medium-rss-github.vercel.app/@ingelbrechtrobin/2/link
+```
+
 Live demo: <a href="https://github.com/robiningelbrecht">https://github.com/robiningelbrecht</a>
 
 If you decide to use the app, please consider giving it a ⭐

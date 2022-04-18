@@ -18,6 +18,7 @@ class MediumRssItem
     private function __construct(
         string $userName,
         int $postIndex,
+        private bool $needsRedirect
     )
     {
 
@@ -74,6 +75,11 @@ class MediumRssItem
         return $this->summary;
     }
 
+    public function needsRedirect(): bool
+    {
+        return $this->needsRedirect;
+    }
+
     public static function fromRequest(Request $request): self
     {
         $uriParts = explode(
@@ -81,7 +87,7 @@ class MediumRssItem
             trim($request->getRequestUri(), '/')
         );
 
-        if (count($uriParts) !== 2) {
+        if (!in_array(count($uriParts), [2, 3])) {
             throw new \RuntimeException('Provide your Medium username and the index of the post. Eg: @robiningelbrecht/0');
         }
 
@@ -89,7 +95,7 @@ class MediumRssItem
             throw new \RuntimeException('Make sure your username stats with "@"');
         }
 
-        return new self($uriParts[0], intval($uriParts[1]));
+        return new self($uriParts[0], intval($uriParts[1]), !empty($uriParts[2]) && $uriParts[2] === 'link');
     }
 
     private function extractImageSource(string $content): ?string

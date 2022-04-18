@@ -5,7 +5,13 @@ require dirname(__DIR__) . '/vendor/autoload.php';
 use App\MediumRssItem;
 use Symfony\Component\HttpFoundation\Request;
 
-$mediumRssItem = MediumRssItem::fromRequest(Request::createFromGlobals());
+$request = Request::createFromGlobals();
+$mediumRssItem = MediumRssItem::fromRequest($request);
+
+if ($mediumRssItem->needsRedirect()) {
+    header('Location: ' . $mediumRssItem->getLink());
+    exit();
+}
 
 header('Content-type: image/svg+xml');
 
@@ -32,7 +38,6 @@ echo '
                     padding: 10px 20px;
                     border-radius: 10px;
                     background: rgb(255, 255, 255);
-                    background-size: 600% 400%;
                     overflow: hidden;
                     text-overflow: ellipsis;
                 }

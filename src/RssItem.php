@@ -80,6 +80,6 @@ class RssItem
             return null;
         }
 
-        return substr(strip_tags($matches[1]), 0, 60) . ' ...';
+        return strip_tags($matches[1]);
     }
 }

@@ -26,7 +26,7 @@ $template = $twig->load('rss-items.html.twig');
 echo $template->render([
     'items' => array_map(fn(RssItem $rssItem): array => [
         'title' => $rssItem->getTitle(),
-        'pubDate' => $rssItem->getPubDate()->format('D M Y, H:i'),
+        'pubDate' => $rssItem->getPubDate()->format('D M d Y, H:i'),
         'link' => $rssItem->getLink(),
         'image' => $rssItem->getImage(),
         'summary' => $rssItem->getSummary(),

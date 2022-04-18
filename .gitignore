@@ -1,0 +1,6 @@
+# PHP
+/vendor
+/node_modules
+
+# Vercel
+.vercel

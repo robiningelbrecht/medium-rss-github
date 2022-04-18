@@ -2,11 +2,8 @@
 
 namespace App;
 
-use Symfony\Component\HttpFoundation\Request;
-
-class MediumRssItem
+class RssItem
 {
-    private const RSS_FEED_URL = 'https://medium.com/feed/%s';
 
     private string $title;
     private string $link;
@@ -15,25 +12,10 @@ class MediumRssItem
     private ?string $image;
     private string $summary;
 
-    private function __construct(
-        string $userName,
-        int $postIndex,
-        private bool $needsRedirect
+    public function __construct(
+        \SimpleXMLElement $item,
     )
     {
-
-        $content = preg_replace(
-            '/&(?!#?[a-z0-9]+;)/',
-            '&amp;',
-            file_get_contents(sprintf(self::RSS_FEED_URL, $userName))
-        );
-        $feed = new \SimpleXMLElement($content);
-
-        if (empty($feed->channel->item[$postIndex])) {
-            throw new \RuntimeException('Could not fetch post with index ' . $postIndex);
-        }
-
-        $item = $feed->channel->item[$postIndex];
 
         $this->title = $item->title;
         $this->link = $item->link;
@@ -73,29 +55,6 @@ class MediumRssItem
     public function getSummary(): string
     {
         return $this->summary;
-    }
-
-    public function needsRedirect(): bool
-    {
-        return $this->needsRedirect;
-    }
-
-    public static function fromRequest(Request $request): self
-    {
-        $uriParts = explode(
-            '/',
-            trim($request->getRequestUri(), '/')
-        );
-
-        if (!in_array(count($uriParts), [2, 3])) {
-            throw new \RuntimeException('Provide your Medium username and the index of the post. Eg: @robiningelbrecht/0');
-        }
-
-        if (!str_starts_with($uriParts[0], '@')) {
-            throw new \RuntimeException('Make sure your username stats with "@"');
-        }
-
-        return new self($uriParts[0], intval($uriParts[1]), !empty($uriParts[2]) && $uriParts[2] === 'link');
     }
 
     private function extractImageSource(string $content): ?string

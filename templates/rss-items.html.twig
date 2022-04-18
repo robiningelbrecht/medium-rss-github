@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" width="800" height="{{ (items|length * 125 - 5) }}">
+    <foreignObject width="100%" height="100%">
+        <div xmlns="http://www.w3.org/1999/xhtml">
+            <style>
+                * {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                    font-family: sans-serif
+                }
+
+                .flex {
+                    display: flex;
+                    align-items: center;
+                }
+
+                .item {
+                    height: 120px;
+                    border: 1px solid rgba(0, 0, 0, .2);
+                    padding: 10px 20px;
+                    border-radius: 10px;
+                    background: rgb(255, 255, 255);
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .item:not(:last-child) {
+                    margin-bottom: 5px;
+                }
+
+                img {
+                    margin-right: 10px;
+                    width: 150px;
+                    height: 100%;
+                    object-fit: cover;
+                }
+
+                .right {
+                    flex: 1;
+                }
+
+                a {
+                    text-decoration: none;
+                    color: inherit
+                }
+
+                p {
+                    line-height: 1.5;
+                    color: #555
+                }
+
+                h3 {
+                    color: #333
+                }
+
+                small {
+                    color: #888;
+                    display: block;
+                    margin-top: 5px;
+                    margin-bottom: 8px
+                }
+            </style>
+            <div class="container">
+                {% for item in items %}
+                    <a class="item flex" href="{{ item.link }}" target="__blank">
+                        {% if item.image %}
+                            <img src="{{ item.image }}" />
+                        {% endif %}
+                        <div class="right">
+                            <h3>{{ item.title }}</h3>
+                            <small>{{ item.pubDate }}</small>
+                            <p>{{ item.summary }}</p>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </foreignObject>
+</svg>

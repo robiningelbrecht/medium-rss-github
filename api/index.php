@@ -2,86 +2,33 @@
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
-use App\MediumRssItem;
+use App\RssItemFactory;
+use App\RssItem;
 use Symfony\Component\HttpFoundation\Request;
+use Twig\Loader\FilesystemLoader;
+use Twig\Environment;
 
 $request = Request::createFromGlobals();
-$mediumRssItem = MediumRssItem::fromRequest($request);
+$rssItems = RssItemFactory::createMultipleFromRequest($request);
 
-if ($mediumRssItem->needsRedirect()) {
-    header('Location: ' . $mediumRssItem->getLink());
+if (count($rssItems) === 1 && str_contains($request->getRequestUri(), '/link')) {
+    // Redirect to external link of RSS item.
+    header('Location: ' . $rssItems[0]->getLink());
     exit();
 }
 
+$loader = new FilesystemLoader(dirname(__DIR__) . '/templates');
+$twig = new Environment($loader);
+
 header('Content-type: image/svg+xml');
 
-echo '
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" width="800" height="120">
-    <foreignObject width="100%" height="100%">
-        <div xmlns="http://www.w3.org/1999/xhtml">
-            <style>
-                * {
-                    margin: 0;
-                    padding: 0;
-                    box-sizing: border-box;
-                    font-family: sans-serif
-                }
-
-                .flex {
-                    display: flex;
-                    align-items: center;
-                }
-
-                .container {
-                    height: 120px;
-                    border: 1px solid rgba(0, 0, 0, .2);
-                    padding: 10px 20px;
-                    border-radius: 10px;
-                    background: rgb(255, 255, 255);
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                }
-
-                img {
-                    margin-right: 10px;
-                    width: 150px;
-                    height: 100%;
-                    object-fit: cover;
-                }
-
-                .right {
-                    flex: 1;
-                }
-
-                a {
-                    text-decoration: none;
-                    color: inherit
-                }
-
-                p {
-                    line-height: 1.5;
-                    color: #555
-                }
-
-                h3 {
-                    color: #333
-                }
-
-                small {
-                    color: #888;
-                    display: block;
-                    margin-top: 5px;
-                    margin-bottom: 8px
-                }
-            </style>
-            <a class="container flex" href="' . $mediumRssItem->getLink() . '" target="__blank">
-                <img src="' . $mediumRssItem->getImage() . '" />
-                <div class="right">
-                    <h3>' . $mediumRssItem->getTitle() . '</h3>
-                    <small>' . $mediumRssItem->getPubDate()->format('D M Y, H:i') . '</small>
-                    <p>' . $mediumRssItem->getSummary() . '</p>
-                </div>
-            </a>
-        </div>
-    </foreignObject>
-</svg>';
+$template = $twig->load('rss-items.html.twig');
+echo $template->render([
+    'items' => array_map(fn(RssItem $rssItem): array => [
+        'title' => $rssItem->getTitle(),
+        'pubDate' => $rssItem->getPubDate()->format('D M Y, H:i'),
+        'link' => $rssItem->getLink(),
+        'image' => $rssItem->getImage(),
+        'summary' => $rssItem->getSummary(),
+    ], $rssItems),
+]);

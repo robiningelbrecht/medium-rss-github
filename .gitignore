@@ -1,6 +1,4 @@
-# PHP
+/.idea
 /vendor
 /node_modules
-
-# Vercel
 .vercel

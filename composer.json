@@ -1,4 +1,5 @@
 {
+  "name": "robiningelbrecht/cmedium-rss-github",
   "description": "Display Medium blog posts on your GitHub README",
   "keywords": [
     "README",

@@ -8,8 +8,33 @@ use Symfony\Component\HttpFoundation\Request;
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
 
+
+$loader = new FilesystemLoader(dirname(__DIR__) . '/templates');
+$twig = new Environment($loader);
 $request = Request::createFromGlobals();
-$rssItems = RssItemFactory::createMultipleFromRequest($request);
+
+$rssItems = [];
+$render = null;
+
+try {
+    $rssItems = RssItemFactory::createMultipleFromRequest($request);
+
+    $template = $twig->load('rss-items.html.twig');
+    $render = $template->render([
+        'items' => array_map(fn(RssItem $rssItem): array => [
+            'title' => $rssItem->getTitle(),
+            'pubDate' => $rssItem->getPubDate()->format('D M d Y, H:i'),
+            'link' => $rssItem->getLink(),
+            'image' => $rssItem->getImage(),
+            'summary' => $rssItem->getSummary(),
+        ], $rssItems),
+    ]);
+} catch (Throwable $e) {
+    $template = $twig->load('error.html.twig');
+    $render = $template->render([
+        'message' => $e->getMessage(),
+    ]);
+}
 
 if (count($rssItems) === 1 && str_contains($request->getRequestUri(), '/link')) {
     // Redirect to external link of RSS item.
@@ -17,18 +42,6 @@ if (count($rssItems) === 1 && str_contains($request->getRequestUri(), '/link')) 
     exit();
 }
 
-$loader = new FilesystemLoader(dirname(__DIR__) . '/templates');
-$twig = new Environment($loader);
-
 header('Content-type: image/svg+xml');
+echo $render;
 
-$template = $twig->load('rss-items.html.twig');
-echo $template->render([
-    'items' => array_map(fn(RssItem $rssItem): array => [
-        'title' => $rssItem->getTitle(),
-        'pubDate' => $rssItem->getPubDate()->format('D M d Y, H:i'),
-        'link' => $rssItem->getLink(),
-        'image' => $rssItem->getImage(),
-        'summary' => $rssItem->getSummary(),
-    ], $rssItems),
-]);

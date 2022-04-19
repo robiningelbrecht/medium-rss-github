@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" width="800px" height="120">
+    <foreignObject width="100%" height="100%">
+        <div xmlns="http://www.w3.org/1999/xhtml">
+            <style>
+                * {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                    font-family: sans-serif
+                }
+
+                .item {
+                    height: 120px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    border: 1px solid #CC0122;
+                    color: #CC0122;
+                    border-radius: 10px;
+                    background: #FEEAED;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                h3,
+                p {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                p {
+                    line-height: 1.5;
+                }
+            </style>
+            <div class="container">
+                <div class="item">
+                    <h3>Oops, something went wrong...</h3>
+                    <p>{{ message|raw }}</p>
+                </div>
+            </div>
+        </div>
+    </foreignObject>
+</svg>

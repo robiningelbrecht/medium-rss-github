@@ -1,7 +1,7 @@
 <h1 align="center">Medium RSS feed on your GitHub README</h1>
 
 <p align="center">
-	<img src="https://github.com/robiningelbrecht/drupal-amqp-rabbitmq/raw/master/readme/rabbitmq.png" alt="RabbitMQ">
+	<img src="https://github.com/robiningelbrecht/medium-rss-github/raw/master/readme/medium.png" alt="Medium">
 </p>
 
 <p align="center">

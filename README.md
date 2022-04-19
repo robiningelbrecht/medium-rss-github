@@ -1,4 +1,14 @@
-# Medium RSS feed on your GitHub README
+<h1 align="center">Medium RSS feed on your GitHub README</h1>
+
+<p align="center">
+	<img src="https://github.com/robiningelbrecht/drupal-amqp-rabbitmq/raw/master/readme/rabbitmq.png" alt="RabbitMQ">
+</p>
+
+<p align="center">
+<a href="https://github.com/robiningelbrecht/drupal-amqp-rabbitmq/blob/master/LICENSE"><img src="https://img.shields.io/github/license/robiningelbrecht/continuous-integration-example?color=428f7e&logo=open%20source%20initiative&logoColor=white" alt="License"></a>
+</p>
+
+------
 
 I used <a href="https://betterprogramming.pub/add-your-recent-published-mediums-article-on-github-readme-9ffaf3ad1606" target="_blank">following solution</a> 
 to dynamically display my Medium articles on my GitHub profile, but the app does not seem to work anymore.

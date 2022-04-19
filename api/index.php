@@ -18,9 +18,16 @@ $render = null;
 
 try {
     $rssItems = RssItemFactory::createMultipleFromRequest($request);
+    $imageHeight = count($rssItems) * 125 - 5;
+    $needsTwoColLayout = $request->query->has('two-col') && count($rssItems) > 1;
+    if ($needsTwoColLayout) {
+        $imageHeight = ceil(count($rssItems) / 2) * 125 - 5;
+    }
 
     $template = $twig->load('rss-items.html.twig');
     $render = $template->render([
+        'height' => $imageHeight,
+        'two_col' => $needsTwoColLayout,
         'items' => array_map(fn(RssItem $rssItem): array => [
             'title' => $rssItem->getTitle(),
             'pubDate' => $rssItem->getPubDate()->format('D M d Y, H:i'),

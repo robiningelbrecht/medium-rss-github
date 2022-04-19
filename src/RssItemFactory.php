@@ -12,7 +12,7 @@ class RssItemFactory
     {
         $uriParts = explode(
             '/',
-            trim($request->getRequestUri(), '/')
+            trim($request->getPathInfo(), '/')
         );
 
         if (count($uriParts) < 2) {

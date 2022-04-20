@@ -34,9 +34,9 @@ That's why I decided to create a clone. Feel free to use it on your own profile 
 * Want your articles in two columns? Not a problem!
 
 ```
-[![Example](https://medium-rss-github.vercel.app/@ingelbrechtrobin/0,1,2,3,4?two-col)](https://ingelbrechtrobin.medium.com/)
+[![Example](https://medium-rss-github.vercel.app/@ingelbrechtrobin/0,1,2,3,4/layout:two-col)](https://ingelbrechtrobin.medium.com/)
 ```
 
-[![Example](https://medium-rss-github.vercel.app/@ingelbrechtrobin/0,1,2,3,4?two-col)](https://ingelbrechtrobin.medium.com/)
+[![Example](https://medium-rss-github.vercel.app/@ingelbrechtrobin/0,1,2,3,4/layout:two-col)](https://ingelbrechtrobin.medium.com/)
 
 If you decide to use the app, please consider giving it a ⭐

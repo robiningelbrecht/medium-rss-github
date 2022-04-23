@@ -47,5 +47,5 @@ if (count($rssItems) === 1 && str_contains($request->getRequestUri(), '/link')) 
 }
 
 header('Content-type: image/svg+xml');
-echo $render;
+echo '';
 

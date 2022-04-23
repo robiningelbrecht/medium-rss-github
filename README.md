@@ -18,25 +18,25 @@ That's why I decided to create a clone. Feel free to use it on your own profile 
 * Display one Medium article and link to the external Medium page
 
 ```
-[![Example](https://medium-rss-github.vercel.app/@ingelbrechtrobin/0/)](https://medium-rss-github.vercel.app/@ingelbrechtrobin/0/link)
+[![Example](https://medium-rss-github.robiningelbrecht.be/@ingelbrechtrobin/0/)](https://medium-rss-github.vercel.app/@ingelbrechtrobin/0/link)
 ```
 
-[![Example](https://medium-rss-github.vercel.app/@ingelbrechtrobin/0/)](https://medium-rss-github.vercel.app/@ingelbrechtrobin/0/link)
+[![Example](https://medium-rss-github.robiningelbrecht.be/@ingelbrechtrobin/0/)](https://medium-rss-github.vercel.app/@ingelbrechtrobin/0/link)
 
 * Display multiple Medium articles and link to your profile page
 
 ```
-[![Example](https://medium-rss-github.vercel.app/@ingelbrechtrobin/0,1,2,3,4/)](https://ingelbrechtrobin.medium.com/)
+[![Example](https://medium-rss-github.robiningelbrecht.be/@ingelbrechtrobin/0,1,2,3,4/)](https://ingelbrechtrobin.medium.com/)
 ```
 
-[![Example](https://medium-rss-github.vercel.app/@ingelbrechtrobin/0,1,2,3,4/)](https://ingelbrechtrobin.medium.com/)
+[![Example](https://medium-rss-github.robiningelbrecht.be/@ingelbrechtrobin/0,1,2,3,4/)](https://ingelbrechtrobin.medium.com/)
 
 * Want your articles in two columns? Not a problem!
 
 ```
-[![Example](https://medium-rss-github.vercel.app/@ingelbrechtrobin/0,1,2,3,4/layout:two-col)](https://ingelbrechtrobin.medium.com/)
+[![Example](https://medium-rss-github.robiningelbrecht.be/@ingelbrechtrobin/0,1,2,3,4/layout:two-col)](https://ingelbrechtrobin.medium.com/)
 ```
 
-[![Example](https://medium-rss-github.vercel.app/@ingelbrechtrobin/0,1,2,3,4/layout:two-col)](https://ingelbrechtrobin.medium.com/)
+[![Example](https://medium-rss-github.robiningelbrecht.be/@ingelbrechtrobin/0,1,2,3,4/layout:two-col)](https://ingelbrechtrobin.medium.com/)
 
 If you decide to use the app, please consider giving it a ⭐

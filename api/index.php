@@ -17,8 +17,6 @@ $request = Request::createFromGlobals();
 $rssItems = [];
 $render = null;
 
-var_dump('here');
-
 try {
     $rssItems = RssItemFactory::createMultipleFromRequest($request);
     $layout = Layout::createFromRequest($request);

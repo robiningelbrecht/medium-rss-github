@@ -26,13 +26,15 @@ class RssItemFactory
             throw new \RuntimeException('Make sure your username stats with "@"');
         }
 
-        $client = new Client();
+        $response = (new Client())->request('GET', sprintf(self::RSS_FEED_URL, $userName));
+        if ($response->getStatusCode() != 200) {
+            throw new \RuntimeException('Could not fetch your RSS feed. Did you provide a valid username?');
+        }
+
         $content = preg_replace(
             '/&(?!#?[a-z0-9]+;)/',
             '&amp;',
-            $client->request('GET', sprintf(self::RSS_FEED_URL, $userName))
-                ->getBody()
-                ->getContents()
+            $response->getBody()->getContents()
         );
         $feed = new \SimpleXMLElement($content);
 

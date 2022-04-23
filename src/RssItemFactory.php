@@ -27,6 +27,7 @@ class RssItemFactory
         }
 
         $response = (new Client())->request('GET', sprintf(self::RSS_FEED_URL, $userName));
+        var_dump($response);
         if ($response->getStatusCode() != 200) {
             throw new \RuntimeException('Could not fetch your RSS feed. Did you provide a valid username?');
         }

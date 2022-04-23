@@ -2,6 +2,7 @@
 
 namespace App;
 
+use GuzzleHttp\Client;
 use Symfony\Component\HttpFoundation\Request;
 
 class RssItemFactory
@@ -25,10 +26,13 @@ class RssItemFactory
             throw new \RuntimeException('Make sure your username stats with "@"');
         }
 
+        $client = new Client();
         $content = preg_replace(
             '/&(?!#?[a-z0-9]+;)/',
             '&amp;',
-            file_get_contents(sprintf(self::RSS_FEED_URL, $userName))
+            $client->request('GET', sprintf(self::RSS_FEED_URL, $userName))
+                ->getBody()
+                ->getContents()
         );
         $feed = new \SimpleXMLElement($content);
 

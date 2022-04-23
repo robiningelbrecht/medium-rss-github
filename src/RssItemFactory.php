@@ -26,6 +26,7 @@ class RssItemFactory
             throw new \RuntimeException('Make sure your username stats with "@"');
         }
 
+        var_dump('getttt');
         $response = (new Client())->request('GET', sprintf(self::RSS_FEED_URL, $userName));
         var_dump($response);
         if ($response->getStatusCode() != 200) {

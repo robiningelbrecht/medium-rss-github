@@ -9,5 +9,8 @@
       "source": "/(.*)",
       "destination": "/api/index.php"
     }
-  ]
+  ],
+  "github": {
+    "silent": true
+  }
 }

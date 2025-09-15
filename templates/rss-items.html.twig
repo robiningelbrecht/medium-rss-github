@@ -88,9 +88,9 @@
                             <img src="{{ item.image }}"/>
                         {% endif %}
                         <div class="right">
-                            <h3>{{ item.title|raw }}</h3>
+                            <h3>{{ item.title|raw|escape('html') }}</h3>
                             <small>{{ item.pubDate }}</small>
-                            <p>{{ item.summary|raw }}</p>
+                            <p>{{ item.summary|raw|escape('html') }}</p>
                         </div>
                     </a>
                 {% endfor %}

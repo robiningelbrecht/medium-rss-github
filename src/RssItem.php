@@ -29,7 +29,7 @@ class RssItem
 
     public function getTitle(): string
     {
-        return htmlspecialchars((string)$this->title);
+        return htmlspecialchars(preg_replace('/[^a-z0-9 ]/i', '', (string)$this->title));
     }
 
     public function getLink(): string
@@ -54,7 +54,7 @@ class RssItem
 
     public function getSummary(): string
     {
-        return htmlspecialchars($this->summary);
+        return htmlspecialchars(preg_replace('/[^a-z0-9 ]/i', '', (string)$this->summary));
     }
 
     private function extractImageSource(string $content): ?string
